@@ -30,6 +30,9 @@ dependencies {
 
     // Hamcrest matchers (already used in your test)
     testImplementation("org.hamcrest:hamcrest:2.2")
+    
+    // Jackson Kotlin module for proper Kotlin data class deserialization
+    testImplementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.15.2")
 
     // Selenium for UI testing - ¡AGREGA ESTAS DEPENDENCIAS!
     testImplementation("org.seleniumhq.selenium:selenium-java:4.39.0")

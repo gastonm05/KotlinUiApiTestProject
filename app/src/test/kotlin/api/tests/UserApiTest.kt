@@ -1,4 +1,4 @@
-package api
+package api.tests
 
 import io.restassured.RestAssured
 import io.restassured.RestAssured.given
