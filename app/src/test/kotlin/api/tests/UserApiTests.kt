@@ -2,6 +2,7 @@ package api.tests
 
 import api.clients.UserApiClient
 import api.models.User
+import api.testdata.TestData
 import api.utils.RestAssuredConfig
 import api.utils.ResponseValidator
 import org.junit.jupiter.api.BeforeAll
@@ -49,12 +50,7 @@ class UserApiTests {
     
     @Test
     fun testCreateUser() {
-        val newUser = User(
-            id = 0,
-            name = "Test User",
-            username = "testuser",
-            email = "test@example.com"
-        )
+        val newUser = TestData.sampleUser()
         
         val response = userApiClient.createUser(newUser)
         
@@ -69,12 +65,7 @@ class UserApiTests {
     @Test
     fun testUpdateUser() {
         val userId = 1
-        val updatedUser = User(
-            id = userId,
-            name = "Updated User",
-            username = "updateduser",
-            email = "updated@example.com"
-        )
+        val updatedUser = TestData.updatedUser(id = userId)
         
         val response = userApiClient.updateUser(userId, updatedUser)
         

@@ -19,7 +19,11 @@ app/src/test/kotlin/
 │       ├── HomePageTest.kt          # Home page tests
 │       └── LoginPageTest.kt         # Login tests (valid + invalid scenarios)
 └── api/
-    └── UserApiTest.kt              # API tests with REST Assured
+    ├── clients/                     # REST clients (User, Post)
+    ├── models/                      # Data classes (User, Post + nested)
+    ├── testdata/                    # Factories for reusable test data
+    ├── tests/                       # API test suites (User, Post)
+    └── utils/                       # ApiConfig, RestAssuredConfig, validators
 ```
 
 ## Technologies
@@ -63,6 +67,17 @@ For detailed CI/CD configuration, see [BUILD_CONFIG.md](BUILD_CONFIG.md).
 ./gradlew test --tests "ui.tests.LoginPageTest"
 ```
 
+### Run All API Tests
+```bash
+./gradlew test --tests "api.tests.*"
+```
+
+### Run API Suites Individually
+```bash
+./gradlew test --tests "api.tests.UserApiTests"
+./gradlew test --tests "api.tests.PostApiTests"
+```
+
 ### Run Tests with Headed Browser
 ```bash
 ./gradlew test -Dheadless=false
@@ -90,6 +105,13 @@ For detailed CI/CD configuration, see [BUILD_CONFIG.md](BUILD_CONFIG.md).
 - ExpectedConditions for robust element interactions
 - Flash message handling with text normalization
 
+### API Testing
+- REST Assured with a shared request specification and base URL
+- Jackson Kotlin module for data-class deserialization
+- Reusable API clients (User, Post) with CRUD helpers
+- TestData factory object for consistent fixtures
+- ResponseValidator helpers for status/content-type/body/time checks
+
 ### Test Scenarios
 
 #### Login Tests
@@ -112,6 +134,12 @@ Configured in [app/src/test/kotlin/ui/core/BaseTest.kt](app/src/test/kotlin/ui/c
 - **Sandbox disabled:** `--no-sandbox`
 - **Shared memory:** `--disable-dev-shm-usage` (prevents crashes in containerized environments)
 - **Window size:** `1920x1080`
+
+### API Config
+- Base URL and endpoints: [app/src/test/kotlin/api/utils/ApiConfig.kt](app/src/test/kotlin/api/utils/ApiConfig.kt)
+- REST Assured setup with Jackson Kotlin: [app/src/test/kotlin/api/utils/RestAssuredConfig.kt](app/src/test/kotlin/api/utils/RestAssuredConfig.kt)
+- Shared validation helpers: [app/src/test/kotlin/api/utils/ResponseValidator.kt](app/src/test/kotlin/api/utils/ResponseValidator.kt)
+- Test data factories: [app/src/test/kotlin/api/testdata/TestData.kt](app/src/test/kotlin/api/testdata/TestData.kt)
 
 ## Development
 

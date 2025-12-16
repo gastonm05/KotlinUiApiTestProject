@@ -2,6 +2,7 @@ package api.tests
 
 import api.clients.PostApiClient
 import api.models.Post
+import api.testdata.TestData
 import api.utils.RestAssuredConfig
 import api.utils.ResponseValidator
 import org.junit.jupiter.api.BeforeAll
@@ -62,11 +63,7 @@ class PostApiTests {
     
     @Test
     fun testCreatePost() {
-        val newPost = Post(
-            userId = 1,
-            title = "Test Post Title",
-            body = "This is a test post body"
-        )
+        val newPost = TestData.samplePost()
         
         val response = postApiClient.createPost(newPost)
         
