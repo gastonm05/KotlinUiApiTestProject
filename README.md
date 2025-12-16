@@ -1,6 +1,8 @@
 # Kotlin UI & API Test Project
 
-A Kotlin-based test automation project showcasing Selenium WebDriver with Page Object Model (POM) pattern and API testing with REST Assured.
+[![Run Tests](https://github.com/gastonm05/KotlinUiApiTestProject/actions/workflows/tests.yml/badge.svg)](https://github.com/gastonm05/KotlinUiApiTestProject/actions/workflows/tests.yml)
+
+A Kotlin-based test automation project showcasing Selenium WebDriver with Page Object Model (POM) pattern and API testing with REST Assured. Features automated CI/CD pipeline with GitHub Actions.
 
 ## Project Structure
 
@@ -29,6 +31,25 @@ app/src/test/kotlin/
 - **API Testing:** REST Assured 5.3.0
 - **Build Tool:** Gradle 8.7
 - **Java:** JDK 21 (Eclipse Adoptium)
+- **CI/CD:** GitHub Actions
+
+## CI/CD Pipeline
+
+This project includes automated continuous integration that runs on every push and pull request to `main` or `develop` branches.
+
+### Features
+- ✅ Automated test execution in headless Chrome
+- ✅ Test results published as check runs
+- ✅ HTML test reports uploaded as artifacts (retained for 30 days)
+- ✅ Build status badge on README
+- ✅ Parallel test execution
+
+### Viewing Test Results
+- **GitHub Actions:** [View workflow runs](https://github.com/gastonm05/KotlinUiApiTestProject/actions)
+- **Test Reports:** Download from workflow run artifacts
+- **Status Badge:** Shows current build status at the top of this README
+
+For detailed CI/CD configuration, see [BUILD_CONFIG.md](BUILD_CONFIG.md).
 
 ## Running Tests
 
@@ -86,9 +107,10 @@ app/src/test/kotlin/
 
 ### Driver Options
 Configured in [app/src/test/kotlin/ui/core/BaseTest.kt](app/src/test/kotlin/ui/core/BaseTest.kt):
-- **Headless mode:** `--headless=new` (default on, override with `-Dheadless=false`)
+- **Headless mode:** `--headless=new` (default enabled for CI, override with `-Dheadless=false`)
 - **GPU disabled:** `--disable-gpu`
 - **Sandbox disabled:** `--no-sandbox`
+- **Shared memory:** `--disable-dev-shm-usage` (prevents crashes in containerized environments)
 - **Window size:** `1920x1080`
 
 ## Development
@@ -122,7 +144,23 @@ class ExamplePage(val driver: WebDriver) {
 
 ## Test Results
 
+### Local
 Test reports are generated in `app/build/reports/tests/test/index.html` after each test run.
+
+### CI/CD
+- Test results are published as GitHub Check Runs
+- HTML reports are uploaded as workflow artifacts
+- Test summary appears in the Actions tab for each workflow run
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+All PRs will automatically trigger the test suite via GitHub Actions.
 
 ## License
 
